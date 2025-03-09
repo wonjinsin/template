@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  title: template
+  version: "1.0.0"
+  description: template API
+servers:
+  - url: "{server}/v1/api"
+    description: Local server
+    variables:
+      server:
+        default: "http://localhost:33333"
+        enum:
+          - "http://localhost:33333" # local
+          - "https://stg.example.com" # staging
+paths:
+  /users:
+    $ref: "import/path/user.yaml#/paths/~1users"
+  /boards:
+    $ref: "import/path/board.yaml"
