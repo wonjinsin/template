@@ -6,6 +6,8 @@ paths:
     get:
       summary: Get users
       description: Get users
+      tags:
+        - users
       responses:
         "200":
           description: Custom object created successfully
@@ -70,4 +72,4 @@ components:
         resultData:
           type: object
           description: Dynamic field for additional data
-        
+          nullable: true

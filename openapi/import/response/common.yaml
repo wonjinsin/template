@@ -27,3 +27,4 @@ components:
         resultData:
           type: object
           description: Dynamic field for additional data
+          required: false
