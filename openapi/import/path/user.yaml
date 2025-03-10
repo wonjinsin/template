@@ -15,14 +15,14 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: "#/components/schemas/Response"
+                  - $ref: "../response/common.yaml#/components/schemas/Response"
                   - type: object
                     properties:
                       resultData:
                         $ref: "#/components/schemas/User"
         default:
           description: Error
-          $ref: "#/components/responses/Response"
+          $ref: "../response/common.yaml#/components/responses/Response"
 components:
   securitySchemes:
     BearerAuth:
@@ -54,22 +54,3 @@ components:
           type: string
           description: Name of the user
           example: "John Doe"
-    Response:
-      type: object
-      properties:
-        trid:
-          type: string
-          description: Transaction ID
-          example: "123e4567-e89b-12d3-a456-426614174000"
-        resultCode:
-          type: string
-          description: Result Code
-          example: "200"
-        resultMsg:
-          type: string
-          description: Result Message
-          example: "result message"
-        resultData:
-          type: object
-          description: Dynamic field for additional data
-          nullable: true
