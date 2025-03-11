@@ -13,7 +13,6 @@ services:
     ports:
       - "8002:8080"
     volumes:
-      - ./init.yaml:/init.yaml
-      - ./import:/import
+      - ./:/swagger
     environment:
-      SWAGGER_JSON: /init.yaml
+      SWAGGER_JSON: /swagger/init.yaml

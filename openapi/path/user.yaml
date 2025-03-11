@@ -1,0 +1,60 @@
+post:
+  summary: Create user
+  description: Create user
+  tags:
+    - users
+  requestBody:
+    $ref: "../request/userCreate.yaml#"
+  responses:
+    "200":
+      description: created user successfully
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schema/Response.yaml#"
+              - type: object
+                properties:
+                  resultData:
+                    type: array
+                    items:
+                      $ref: "../schema/User.yaml#"
+    "400":
+      description: Error
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schema/Response.yaml#"
+              - type: object
+                properties:
+                  resultCode:
+                    type: string
+                    description: Error code
+                    example: "400"
+                  resultMsg:
+                    type: string
+                    description: Error message
+                    example: "Error message"
+get:
+  summary: Get users
+  description: Get users
+  tags:
+    - users
+  responses:
+    "200":
+      description: Custom object created successfully
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schema/Response.yaml#"
+              - type: object
+                properties:
+                  resultData:
+                    type: array
+                    items:
+                      $ref: "../schema/User.yaml#"
+    default:
+      description: Error
+      $ref: "../schema/Response.yaml#"

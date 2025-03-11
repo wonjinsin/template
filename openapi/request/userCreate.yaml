@@ -1,0 +1,14 @@
+description: User object to create user
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email of the user
+          example: "test@test.com"
+        name:
+          type: string
+          description: Name of the user
+          example: "John Doe"

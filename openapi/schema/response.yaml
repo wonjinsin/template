@@ -1,0 +1,14 @@
+type: object
+properties:
+  trid:
+    type: string
+    description: Transaction ID
+    example: "123e4567-e89b-12d3-a456-426614174000"
+  resultCode:
+    type: string
+    description: Result Code
+    example: "200"
+  resultMsg:
+    type: string
+    description: Result Message
+    example: "result message"

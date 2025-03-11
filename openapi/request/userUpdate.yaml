@@ -1,0 +1,10 @@
+description: User object to update user
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the user
+          example: "John Doe"
