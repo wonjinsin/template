@@ -1,9 +1,11 @@
 package: api
-output: api.gen.go
+output: api/api.gen.user.go
 generate:
   - types
   - server
   - client
+include-tags:
+  - users
 import-mapping:
   ../schema/Response.yaml: "-"
   ../schema/User.yaml: "-"
