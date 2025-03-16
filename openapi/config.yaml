@@ -1,0 +1,13 @@
+package: api
+output: api.gen.go
+generate:
+  - types
+  - server
+  - client
+import-mapping:
+  ../schema/Response.yaml: "-"
+  ../schema/User.yaml: "-"
+  ../request/userCreate.yaml: "-"
+  ../request/userUpdate.yaml: "-"
+  ../path/user.yaml: "-"
+  ../path/userWithId.yaml: "-"

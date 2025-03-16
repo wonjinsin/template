@@ -1,192 +1,92 @@
-description: >
-  starts with /users
-  user template API
-paths:
-  /users/create:
-    post:
-      summary: Create user
-      description: Create user
-      tags:
-        - users
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateUserBody"
-      responses:
-        "200":
-          description: User created
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
-        default:
-          description: Error
-          $ref: "../response/common.yaml#/components/responses/Response"
-  /users:
-    get:
-      summary: Get users
-      description: Get users
-      tags:
-        - users
-      responses:
-        "200":
-          description: Custom object created successfully
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "../response/common.yaml#/components/schemas/Response"
-                  - type: object
-                    properties:
-                      resultData:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/User"
-        default:
-          description: Error
-          $ref: "../response/common.yaml#/components/responses/Response"
-  /users/{id}:
-    get:
-      summary: Get user by ID
-      description: Get user by ID
-      tags:
-        - users
-      parameters:
-        - name: id
-          in: path
-          required: true
-          type: integer
-          format: uint64
-          example: 1
-      responses:
-        "200":
-          description: User found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
-        default:
-          description: Error
-          $ref: "../response/common.yaml#/components/responses/Response"
-    put:
-      summary: Update user by ID
-      description: Update user by ID
-      tags:
-        - users
-      parameters:
-        - name: id
-          in: path
-          required: true
-          type: integer
-          format: uint64
-          example: 1
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateUserBody"
-      responses:
-        "200":
-          description: User updated
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "../response/common.yaml#/components/schemas/Response"
-                  - type: object
-                    properties:
-                      resultData:
-                        $ref: "#/components/schemas/User"
-        default:
-          description: Error
-          $ref: "../response/common.yaml#/components/responses/Response"
-    delete:
-      summary: Delete user by ID
-      description: Delete user by ID
-      tags:
-        - users
-      parameters:
-        - name: id
-          in: path
-          required: true
-          type: integer
-          format: uint64
-          example: 1
-      responses:
-        "200":
-          description: User deleted
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "../response/common.yaml#/components/schemas/Response"
-                  - type: object
-                    properties:
-                      resultMsg:
-                        type: string
-                        description: Result message
-                        example: "User deleted successfully"
-        default:
-          description: Error
-          $ref: "../response/common.yaml#/components/responses/Response"
-components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT 
+get:
+  summary: Get user by ID
+  description: Get user by ID
+  tags:
+    - users
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: uint64
+      example: 1
   responses:
-    Response:
-      description: Standard API response, error also included
+    "200":
+      description: User found
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Response"
-  schemas:
-    CreateUserBody:
-      type: object
-      properties:
-        email:
-          type: string
-          description: Email of the user
-          example: "test@test.com"
-        name:
-          type: string
-          description: Name of the user
-          example: "John Doe"
-    UpdateUserBody:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the user
-          example: "John Doe"
-    DeleteUserBody:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: uint64
-          description: User ID
-          minimum: 1
-          example: 1
-    User:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: uint64
-          description: User ID
-          minimum: 1
-          example: 1
-        email:
-          type: string
-          description: Email of the user
-          example: "test@test.com"
-        name:
-          type: string
-          description: Name of the user
-          example: "John Doe"
+            allOf:
+              - $ref: "../schema/Response.yaml"
+              - type: object
+                properties:
+                  resultData:
+                    type: object
+                    description: User found successfully
+                    $ref: "../schema/User.yaml"
+    default:
+      description: Error
+      $ref: "../schema/Response.yaml"
+put:
+  summary: Update user
+  description: Update user
+  tags:
+    - users
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: uint64
+      example: 1
+  requestBody:
+    $ref: "../request/userUpdate.yaml"
+  responses:
+    "200":
+      description: User updated
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schema/Response.yaml"
+              - type: object
+                properties:
+                  resultData:
+                    type: object
+                    description: Updated user successfully
+                    $ref: "../schema/User.yaml"
+    default:
+      description: Error
+      $ref: "../schema/Response.yaml"
+delete:
+  summary: Delete user
+  description: Delete user
+  tags:
+    - users
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: uint64
+      example: 1
+  responses:
+    "200":
+      description: User deleted
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "../schema/Response.yaml"
+              - type: object
+                properties:
+                  resultMsg:
+                    type: string
+                    description: Result message
+                    example: "User deleted successfully"
+    default:
+      description: Error
+      $ref: "../schema/Response.yaml"

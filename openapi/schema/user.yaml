@@ -1,14 +1,14 @@
 type: object
 properties:
-  trid:
+  id:
     type: string
-    description: Transaction ID
+    description: User ID
     example: "123e4567-e89b-12d3-a456-426614174000"
-  resultCode:
+  name:
     type: string
-    description: Result Code
-    example: "200"
-  resultMsg:
+    description: User Name
+    example: "John Doe"
+  email:
     type: string
-    description: Result Message
-    example: "result message"
+    description: User Email
+    example: "john.doe@example.com"

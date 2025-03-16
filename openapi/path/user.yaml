@@ -4,7 +4,7 @@ post:
   tags:
     - users
   requestBody:
-    $ref: "../request/userCreate.yaml#"
+    $ref: "../request/userCreate.yaml"
   responses:
     "200":
       description: created user successfully
@@ -12,20 +12,19 @@ post:
         application/json:
           schema:
             allOf:
-              - $ref: "../schema/Response.yaml#"
+              - $ref: "../schema/Response.yaml"
               - type: object
                 properties:
                   resultData:
-                    type: array
-                    items:
-                      $ref: "../schema/User.yaml#"
+                    type: object
+                    $ref: "../schema/User.yaml"
     "400":
       description: Error
       content:
         application/json:
           schema:
             allOf:
-              - $ref: "../schema/Response.yaml#"
+              - $ref: "../schema/Response.yaml"
               - type: object
                 properties:
                   resultCode:
@@ -48,13 +47,13 @@ get:
         application/json:
           schema:
             allOf:
-              - $ref: "../schema/Response.yaml#"
+              - $ref: "../schema/Response.yaml"
               - type: object
                 properties:
                   resultData:
                     type: array
                     items:
-                      $ref: "../schema/User.yaml#"
+                      $ref: "../schema/User.yaml"
     default:
       description: Error
-      $ref: "../schema/Response.yaml#"
+      $ref: "../schema/Response.yaml"

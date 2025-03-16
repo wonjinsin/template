@@ -14,4 +14,6 @@ servers:
           - "https://stg.example.com" # staging
 paths:
   /users:
-    $ref: "path/user.yaml#"
+    $ref: "./path/user.yaml"
+  /users/{id}:
+    $ref: "./path/userWithId.yaml"
