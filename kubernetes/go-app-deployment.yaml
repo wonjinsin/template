@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-app-deployment
+  namespace: dev
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: go-app
+  template: # 따로 파일로 뺴서, Kind: Pod 로 만들어도 됨
+    metadata:
+      labels:
+        app: go-app
+    spec:
+      containers:
+        - name: go-container
+          image: go-sample-image
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: go-app-config
+                  key: PORT
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: go-app-secret
+                  key: secret-key
