@@ -4,11 +4,17 @@ metadata:
   name: go-app-service
   namespace: dev
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: go-app # pods의 label 이름
   ports:
-    - protocol: TCP
+    - name: go-app-port1
+      protocol: TCP
       port: 8080 # 서비스의 포트
       targetPort: 8080 # pod의 포트
       nodePort: 30001 # 노드의 포트, 노드는 서비스의 전단계에 있음
+    - name: go-app-port2
+      protocol: TCP
+      port: 8081 # 서비스의 포트
+      targetPort: 8080 # pod의 포트
+      nodePort: 30002 # 노드의 포트, 노드는 서비스의 전단계에 있음

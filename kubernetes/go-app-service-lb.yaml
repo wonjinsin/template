@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-app-service-lb
+  namespace: dev
+spec:
+  type: LoadBalancer
+  selector:
+    app: go-app
+  ports:
+    - name: go-app-port1
+      protocol: TCP
+      port: 8080 # 이 포트로 외부 접근, LoadBalancer 타입은 nodeport에 직접 접근은 안됨
+      targetPort: 8080 # pod의 포트
+    - name: go-app-port2
+      protocol: TCP
+      port: 8081 # 이 포트로 외부 접근(External IP통해서), LoadBalancer 타입은 nodeport에 직접 접근은 안됨
+      targetPort: 8080 # pod의 포트
