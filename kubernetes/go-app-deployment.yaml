@@ -31,12 +31,14 @@ spec:
                   name: go-app-secret
                   key: secret-key
           volumeMounts:
-            - name: go-app-pv # Persistent volume
+            - name: go-app-pv # Persistent volume, 실제는 pv없이 클라우드의 pv를 사용
               mountPath: /data
             - name: cache-volume # Ephemeral volume, 같은 파드 내에서 복수의 컨테이너가 공유 가능
               mountPath: /cache
-            - name: host-path-volume # hostPath volume, 노드의 특정 디텍토리를 컨테이너의 마운트
+            - name: host-path-volume # hostPath volume, 노드의 특정 디텍토리를 컨테이너의 마운트, 실제로는 많이 안쓰임
               mountPath: /host-path
+            - name: config-volume # configMap volume, 컨테이너에 환경변수 전달
+              mountPath: /etc/config
         - name: nginx
           image: nginx:latest
           imagePullPolicy: IfNotPresent
@@ -55,3 +57,6 @@ spec:
           hostPath:
             path: /tmp
             type: Directory
+        - name: config-volume
+          configMap:
+            name: go-app-config
