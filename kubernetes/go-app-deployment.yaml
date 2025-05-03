@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: go-container
-          image: go-sample-image
+          image: go-sample-image2
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080

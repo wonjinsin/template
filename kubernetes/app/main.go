@@ -20,7 +20,7 @@ func main() {
 	}
 
 	http.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Secret is %s\n", secretKey)
+		fmt.Fprintf(w, "Secret is this %s\n", secretKey)
 	})
 	http.ListenAndServe(":"+port, nil)
 }
