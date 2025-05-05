@@ -4,6 +4,7 @@ metadata:
   name: go-app-ingress
   namespace: dev
   annotations:
+    ingressClassName: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx

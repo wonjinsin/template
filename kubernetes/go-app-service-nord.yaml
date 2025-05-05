@@ -12,10 +12,12 @@ spec:
       protocol: TCP
       port: 8080 # 서비스의 포트
       targetPort: 8080 # pod의 포트
+      nodePort: 30001 # 노드의 포트, 노드는 서비스의 전단계에 있음, istio쓰면 이걸 쓰지 않아도 됨
     - name: go-app-port2
       protocol: TCP
       port: 8081 # 서비스의 포트
       targetPort: 8080 # pod의 포트
+      nodePort: 30001 # 노드의 포트, 노드는 서비스의 전단계에 있음, istio쓰면 이걸 쓰지 않아도 됨
 
 ---
 
