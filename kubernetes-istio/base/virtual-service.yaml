@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: go-app-vs
+spec:
+  hosts:
+    - "*"  # Gateway에서 허용한 host
+  gateways:
+    - gateway
+  http:
+    - match:
+        - uri:
+            prefix: /go/
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: go-app-service.dev.svc.cluster.local
+            port:
+              number: 8080
+    - match:
+        - uri:
+            prefix: /nginx/
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: nginx-service.dev.svc.cluster.local
+            port:
+              number: 80

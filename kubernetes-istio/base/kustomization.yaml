@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - go-app-config.yaml
+  - go-app-secret.yaml
+  - go-app-pv.yaml
+  - go-app-pvc.yaml
+  - go-app-deployment.yaml
+  - nginx-deployment.yaml
+  - service.yaml
+  - gateway.yaml
+  - virtual-service.yaml
+
+labels:
+  - includeSelectors: true
+    includeTemplates: true
+    pairs:
+      app.kubernetes.io/managed-by: kustomize

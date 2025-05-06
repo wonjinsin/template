@@ -1,0 +1,23 @@
+# istioctl install -f istio-operator.yaml
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: istio-install
+  namespace: istio-system
+spec:
+  profile: demo
+  components:
+    ingressGateways:
+      - name: istio-ingressgateway
+        enabled: true
+    egressGateways:
+      - name: istio-egressgateway
+        enabled: false
+  values:
+    global:
+      istioNamespace: istio-system
+      proxy:
+        autoInject: enabled
+    gateways:
+      istio-ingressgateway:
+        type: LoadBalancer

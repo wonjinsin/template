@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-app
+  template: # 따로 파일로 뺴서, Kind: Pod 로 만들어도 됨
+    metadata:
+      labels:
+        app: go-app
+    spec:
+      containers:
+        - name: go-container
+          image: go-sample-image2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: go-app-config
+                  key: PORT
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: go-app-secret
+                  key: secret-key
+          volumeMounts:
+            - name: go-app-pv # Persistent volume, 실제는 pv없이 클라우드의 pv를 사용
+              mountPath: /data
+            - name: cache-volume # Ephemeral volume, 같은 파드 내에서 복수의 컨테이너가 공유 가능
+              mountPath: /cache
+            - name: host-path-volume # hostPath volume, 노드의 특정 디텍토리를 컨테이너의 마운트, 실제로는 많이 안쓰임
+              mountPath: /host-path
+            - name: config-volume # configMap volume, 컨테이너에 환경변수 전달
+              mountPath: /etc/config
+      volumes:
+        - name: go-app-pv
+          persistentVolumeClaim:
+            claimName: go-app-pvc
+        - name: cache-volume
+          emptyDir: {}
+        - name: host-path-volume
+          hostPath:
+            path: /tmp
+            type: Directory
+        - name: config-volume
+          configMap:
+            name: go-app-config

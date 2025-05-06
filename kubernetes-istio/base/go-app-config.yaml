@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: go-app-config
+data:
+  PORT: "8080"
+  EXAMPLE_ENV: "test"
+  EXAMPLE_ENV2: "test2"

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: go-app-pvc # 이게 pv를 직접 만들지 않고, pv없이 클라우드를 사용하는게 가능함
+spec:
+  storageClassName: go-app-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
