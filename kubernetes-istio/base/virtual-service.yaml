@@ -15,7 +15,7 @@ spec:
         uri: /
       route:
         - destination:
-            host: go-app-service.dev.svc.cluster.local
+            host: go-app-service
             port:
               number: 8080
     - match:
@@ -25,6 +25,6 @@ spec:
         uri: /
       route:
         - destination:
-            host: nginx-service.dev.svc.cluster.local
+            host: nginx-service
             port:
               number: 80

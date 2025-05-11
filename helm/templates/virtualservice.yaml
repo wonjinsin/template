@@ -1,0 +1,32 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ .Values.istio.virtualService.name }}
+  labels:
+    {{- include "helm.labels" . | nindent 4 }}
+spec:
+  hosts:
+    {{- toYaml .Values.istio.virtualService.hosts | nindent 4 }}
+  gateways:
+    - {{ .Values.istio.gateway.name }}
+  http:
+    - match:
+        - uri:
+            prefix: /go/
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: {{ include "helm.fullname" . }}
+            port:
+              number: {{ .Values.service.port }}
+    - match:
+        - uri:
+            prefix: /nginx/
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: {{ include "helm.fullname" . }}-nginx
+            port:
+              number: {{ .Values.nginx.service.port }} 
