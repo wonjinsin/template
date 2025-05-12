@@ -1,0 +1,11 @@
+name: Reusable Workflow
+
+on:
+  workflow_call:
+
+jobs:
+  print_message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print message
+        run: echo "Reusable workflow executed!" 
