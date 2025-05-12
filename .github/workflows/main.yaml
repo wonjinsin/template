@@ -1,0 +1,10 @@
+name: Trigger Subfolder Workflow
+
+on:
+  push:
+    paths:
+      - 'act-test/**'
+
+jobs:
+  call-subworkflow:
+    uses: ./act-test/.github/workflows/main.yaml
