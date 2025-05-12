@@ -1,7 +1,7 @@
 name: Trigger Subfolder Workflow
 
 on:
-  push:
+  pull_request:
     paths:
       - 'act-test/**'
 
