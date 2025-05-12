@@ -7,4 +7,4 @@ on:
 
 jobs:
   call-subworkflow:
-    uses: ./.github/workflows/main.yaml
+    uses: ./.github/workflows/reusable-workflow.yaml
