@@ -7,4 +7,4 @@ on:
 
 jobs:
   call-subworkflow:
-    uses: ./act-test/.github/workflows/main.yaml@${{ github.ref }}
+    uses: ./act-test/.github/workflows/main.yaml@${{ github.sha }}
