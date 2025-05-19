@@ -1,6 +1,9 @@
-name: CI
+name: Act test ci, cd
+
 on:
-  workflow_call:
+  pull_request:
+    paths:
+      - 'act-test/**'
 
 jobs:
   test:
