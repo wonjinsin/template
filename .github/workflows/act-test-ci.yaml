@@ -1,0 +1,20 @@
+name: Act test ci, cd
+
+on:
+  pull_request:
+    paths:
+      - 'act-test/**'
+
+jobs:
+  test:
+    name: Go CI/CD
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v5
+        with:
+          go-version: 1.23
+      - name: Run go test
+        working-directory: act-test
+        run: go test ./...
