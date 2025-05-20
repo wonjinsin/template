@@ -1,0 +1,19 @@
+name: Reusable Workflow
+on:
+  workflow_call:
+    inputs:
+      from:
+        description: "The source to lint"
+        required: true
+        type: string
+      dir:
+        description: "The directory to lint"
+        required: true
+        default: "."
+        type: string
+jobs:
+  reusable-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Reusable step
+        run: echo "This is a reusable workflow from ${{ inputs.from }}" 
