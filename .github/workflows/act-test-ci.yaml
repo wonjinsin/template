@@ -24,7 +24,7 @@ jobs:
         run: go test ./...
   lint:
     name: Go lint
-    uses: ${{ env.working-dir }}/reusable/reusable-lint.yaml@$main
+    uses: ./.github/workflows/reusable/reusable-lint.yaml
     with:
       from: ${{ env.working-dir }}/act-test-ci.yaml
       dir: ${{ env.dir }}
