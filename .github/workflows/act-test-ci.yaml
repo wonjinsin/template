@@ -6,7 +6,7 @@ on:
       - 'act-test/**'
 
 env:
-  working-dir: ./.github/workflows
+  working-dir: .github/workflows
   dir: ./act-test
 
 jobs:
