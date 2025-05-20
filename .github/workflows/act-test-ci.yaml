@@ -5,6 +5,10 @@ on:
     paths:
       - 'act-test/**'
 
+env:
+  working-dir: ./.github/workflows
+  dir: ./act-test
+
 jobs:
   test:
     name: Go CI/CD
@@ -16,5 +20,11 @@ jobs:
         with:
           go-version: 1.23
       - name: Run go test
-        working-directory: act-test
+        working-directory: ${{ env.dir }}
         run: go test ./...
+  lint:
+    name: Go lint
+    uses: ${{ env.working-dir }}/reusable/reusable-lint.yaml
+    with:
+      from: ${{ env.working-dir }}/act-test-ci.yaml
+      dir: ${{ env.dir }}
