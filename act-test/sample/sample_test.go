@@ -9,4 +9,11 @@ func TestHello(t *testing.T) {
 	if got != want {
 		t.Errorf("got %q want %q", got, want)
 	}
+
+	got = Hello("Go")
+	want = "Hello, Go1!"
+
+	if got == want {
+		t.Errorf("got %q want %q", got, want)
+	}
 }
